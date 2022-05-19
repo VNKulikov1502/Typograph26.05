@@ -17,6 +17,19 @@ namespace TextEditor
         {
             InitializeComponent();
         }
+        public static string FirstUpper(string str)
+        {
+            string[] s = str.Split(' ');
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i].Length > 1)
+                    s[i] = s[i].Substring(0, 1).ToUpper() + s[i].Substring(1, s[i].Length - 1).ToLower();
+                else s[i] = s[i].ToUpper();
+            }
+            return string.Join(" ", s);
+        }
+
         public void DoRule4()
         {
             string path = "YoWords.txt";
@@ -31,9 +44,9 @@ namespace TextEditor
                 }
                 foreach (var word in YoWords)
                 {
-                    if (richTextBox1.Text.Contains(word.Key))
+                    if (richTextBox1.Text.ToLower().Contains(word.Key))
                     {
-                        richTextBox1.Text = richTextBox1.Text.Replace(word.Key, word.Value);
+                        richTextBox1.Text = richTextBox1.Text.ToLower().Replace(word.Key, word.Value);
                     }
                 }
             }
