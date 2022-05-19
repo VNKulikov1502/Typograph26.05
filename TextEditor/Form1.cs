@@ -82,13 +82,13 @@ namespace TextEditor
         }
         private void DuAbsurdRule()
         {
-            if (richTextBox1.Text.Contains("Б"))
-            {
-                richTextBox1.Text = richTextBox1.Text.Replace("Б", "барабара беребере");
-            }
             if (richTextBox1.Text.Contains("б"))
             {
                 richTextBox1.Text = richTextBox1.Text.Replace("б", "барабара беребере");
+            }
+            if (richTextBox1.Text.Contains("Б"))
+            {
+                richTextBox1.Text = richTextBox1.Text.Replace("Б", "барабара беребере");
             }
         }
         private void button1_Click(object sender, EventArgs e)
