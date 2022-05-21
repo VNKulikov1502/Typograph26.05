@@ -17,7 +17,7 @@ namespace TextEditor
         {
             InitializeComponent();
         }
-        public static string FirstUpper(string str)
+        private static string FirstUpper(string str)
         {
             string[] s = str.Split(' ');
 
@@ -30,7 +30,7 @@ namespace TextEditor
             return string.Join(" ", s);
         }
 
-        public void DoRule4()
+        private void DoRule4()
         {
             string path = "YoWords.txt";
             var YoWords = new Dictionary<string, string>();
@@ -97,11 +97,11 @@ namespace TextEditor
         {
             if (richTextBox1.Text.Contains("б"))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("б", "барабара беребере");
+                richTextBox1.Text = richTextBox1.Text.Replace("б", " барабара беребере ");
             }
             if (richTextBox1.Text.Contains("Б"))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("Б", "барабара беребере");
+                richTextBox1.Text = richTextBox1.Text.Replace("Б", " барабара беребере ");
             }
         }
         private void button1_Click(object sender, EventArgs e)
@@ -110,12 +110,32 @@ namespace TextEditor
             DoRule2();
             DoRule3();
             DoRule4();
+            DoRule5();
             DuAbsurdRule();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "Любовь как дым - сегодня есть, а завтра мы не курим...";
+        }
+        private void DoRule5()
+        {
+            List<string> names = new List<string>();
+            using (StreamReader reader = new StreamReader("Names.txt"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    string[] arrayNames = reader.ReadLine().Split(' ');
+                    names.Add(arrayNames[0]);
+                }
+                foreach (var name in names)
+                {
+                    if (richTextBox1.Text.Contains(name.ToLower()))
+                    {
+                        richTextBox1.Text = richTextBox1.Text.Replace(name.ToLower(), name);
+                    }
+                }
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
