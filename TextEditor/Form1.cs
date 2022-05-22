@@ -16,6 +16,7 @@ namespace TextEditor
         public Form1()
         {
             InitializeComponent();
+            
         }
         private static string FirstUpper(string str)
         {
@@ -141,6 +142,19 @@ namespace TextEditor
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Текстовый документ (*.txt)|*.txt|Все файлы (*.*)|*.*";
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter streamWriter = new StreamWriter(saveFileDialog.FileName);
+                streamWriter.WriteLine(richTextBox1.Text);
+                streamWriter.Close();
+            }
         }
     }
 }
