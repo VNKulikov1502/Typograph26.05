@@ -31,7 +31,7 @@ namespace TextEditor
             return string.Join(" ", s);
         }
 
-        private void DoRule4()
+        private void DoRule4(string str)
         {
             string path = "YoWords.txt";
             var YoWords = new Dictionary<string, string>();
@@ -45,9 +45,9 @@ namespace TextEditor
                 }
                 foreach (var word in YoWords)
                 {
-                    if (richTextBox1.Text.ToLower().Contains(word.Key))
+                    if (str.ToLower().Contains(word.Key))
                     {
-                        richTextBox1.Text = richTextBox1.Text.ToLower().Replace(word.Key, word.Value);
+                        richTextBox1.Text = str.ToLower().Replace(word.Key, word.Value);
                     }
                 }
             }
@@ -56,70 +56,70 @@ namespace TextEditor
         {
             richTextBox1.Text = null;
         }
-        private void DoRule1()
+        private void DoRule1(string str)
         {
-            if ((richTextBox1.Text.Contains("*")))
+            if ((str.Contains("*")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("*", "×");
+                richTextBox1.Text = str.Replace("*", "×");
             }
-            if ((richTextBox1.Text.Contains(" *")))
+            if ((str.Contains(" *")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace(" *", "×");
+                richTextBox1.Text = str.Replace(" *", "×");
             }
         }
-        private void DoRule2()
+        private void DoRule2(string input)
         {
             
-            if (richTextBox1.Text.Contains("..."))
+            if (input.Contains("..."))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("...", "…");
+                richTextBox1.Text = input.Replace("...", "…");
             }
         }
-        private void DoRule3()
+        private void DoRule3(string input)
         {
-            if ((richTextBox1.Text.Contains("—")))
+            if ((input.Contains("—")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("—", (char)(160) + "—");
+                richTextBox1.Text = input.Replace("—", (char)(160) + "—");
             }
-            if ((richTextBox1.Text.Contains(" —")))
+            if ((input.Contains(" —")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace(" —", (char)(160) + "—");
+                richTextBox1.Text = input.Replace(" —", (char)(160) + "—");
             }
-            if ((richTextBox1.Text.Contains("-")))
+            if ((input.Contains("-")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("-", (char)(160) + "—");
+                richTextBox1.Text = input.Replace("-", (char)(160) + "—");
             }
-            if ((richTextBox1.Text.Contains("-")))
+            if ((input.Contains("-")))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("-", (char)(160) + "—");
+                richTextBox1.Text = input.Replace("-", (char)(160) + "—");
             }
         }
-        private void DuAbsurdRule()
+        private void DoAbsurdRule(string input)
         {
-            if (richTextBox1.Text.Contains("б"))
+            if (input.Contains("б"))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("б", " барабара беребере ");
+                richTextBox1.Text = input.Replace("б", " барабара беребере ");
             }
-            if (richTextBox1.Text.Contains("Б"))
+            if (input.Contains("Б"))
             {
-                richTextBox1.Text = richTextBox1.Text.Replace("Б", " барабара беребере ");
+                richTextBox1.Text = input.Replace("Б", " барабара беребере ");
             }
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            DoRule1();
-            DoRule2();
-            DoRule3();
-            DoRule4();
-            DoRule5();
-            DuAbsurdRule();
+            DoRule1(richTextBox1.Text);
+            DoRule2(richTextBox1.Text);
+            DoRule3(richTextBox1.Text);
+            DoRule4(richTextBox1.Text);
+            DoRule5(richTextBox1.Text);
+            DoAbsurdRule(richTextBox1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "Любовь как дым - сегодня есть, а завтра мы не курим...";
         }
-        private void DoRule5()
+        private void DoRule5(string input)
         {
             List<string> names = new List<string>();
             using (StreamReader reader = new StreamReader("Names.txt"))
@@ -131,9 +131,9 @@ namespace TextEditor
                 }
                 foreach (var name in names)
                 {
-                    if (richTextBox1.Text.Contains(name.ToLower()))
+                    if (input.Contains(name.ToLower()))
                     {
-                        richTextBox1.Text = richTextBox1.Text.Replace(name.ToLower(), name);
+                        richTextBox1.Text = input.Replace(name.ToLower(), name);
                     }
                 }
             }
