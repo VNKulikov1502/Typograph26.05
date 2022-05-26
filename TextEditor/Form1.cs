@@ -31,7 +31,7 @@ namespace TextEditor
             return string.Join(" ", s);
         }
 
-        private void DoRule4(string str)
+        private string DoRule4(string str)
         {
             string path = "YoWords.txt";
             var YoWords = new Dictionary<string, string>();
@@ -51,6 +51,7 @@ namespace TextEditor
                     }
                 }
             }
+            return str;
         }
         private void button2_Click(object sender, EventArgs e)
         {
@@ -60,11 +61,11 @@ namespace TextEditor
         {
             if ((str.Contains("*")))
             {
-                richTextBox1.Text = str.Replace("*", "×");
+               str = str.Replace("*", "×");
             }
             if ((str.Contains(" *")))
             {
-                richTextBox1.Text = str.Replace(" *", "×");
+                str = str.Replace(" *", "×");
             }
         }
         private void DoRule2(string input)
@@ -94,16 +95,19 @@ namespace TextEditor
                 richTextBox1.Text = input.Replace("-", (char)(160) + "—");
             }
         }
-        private void DoAbsurdRule(string input)
+        public string DoAbsurdRule(string input)
         {
             if (input.Contains("б"))
             {
-                richTextBox1.Text = input.Replace("б", " барабара беребере ");
+                input = input.Replace("б", "барабара беребере");
+                
             }
             if (input.Contains("Б"))
             {
-                richTextBox1.Text = input.Replace("Б", " барабара беребере ");
+                input = input.Replace("Б", "барабара беребере");
+             
             }
+            return input;
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -112,14 +116,15 @@ namespace TextEditor
             DoRule3(richTextBox1.Text);
             DoRule4(richTextBox1.Text);
             DoRule5(richTextBox1.Text);
-            DoAbsurdRule(richTextBox1.Text);
+            richTextBox1.Text = DoAbsurdRule(richTextBox1.Text);
+            richTextBox1.Text = DoRule4(richTextBox1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "Любовь как дым - сегодня есть, а завтра мы не курим...";
         }
-        private void DoRule5(string input)
+        public void DoRule5(string input)
         {
             List<string> names = new List<string>();
             using (StreamReader reader = new StreamReader("Names.txt"))
