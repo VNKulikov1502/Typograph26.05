@@ -47,7 +47,7 @@ namespace TextEditor
                 {
                     if (str.ToLower().Contains(word.Key))
                     {
-                        richTextBox1.Text = str.ToLower().Replace(word.Key, word.Value);
+                        str = str.ToLower().Replace(word.Key, word.Value);
                     }
                 }
             }
@@ -57,7 +57,7 @@ namespace TextEditor
         {
             richTextBox1.Text = null;
         }
-        private void DoRule1(string str)
+        private string DoRule1(string str)
         {
             if ((str.Contains("*")))
             {
@@ -67,33 +67,36 @@ namespace TextEditor
             {
                 str = str.Replace(" *", "×");
             }
+            return str;
         }
-        private void DoRule2(string input)
+        public string DoRule2(string input)
         {
             
             if (input.Contains("..."))
             {
-                richTextBox1.Text = input.Replace("...", "…");
+                input = input.Replace("...", "…");
             }
+            return input;
         }
-        private void DoRule3(string input)
+        private string DoRule3(string input)
         {
             if ((input.Contains("—")))
             {
-                richTextBox1.Text = input.Replace("—", (char)(160) + "—");
+                input = input.Replace("—", (char)(160) + "—");
             }
             if ((input.Contains(" —")))
             {
-                richTextBox1.Text = input.Replace(" —", (char)(160) + "—");
+                input = input.Replace(" —", (char)(160) + "—");
             }
             if ((input.Contains("-")))
             {
-                richTextBox1.Text = input.Replace("-", (char)(160) + "—");
+                input = input.Replace("-", (char)(160) + "—");
             }
             if ((input.Contains("-")))
             {
-                richTextBox1.Text = input.Replace("-", (char)(160) + "—");
+                input = input.Replace("-", (char)(160) + "—");
             }
+            return input;
         }
         public string DoAbsurdRule(string input)
         {
@@ -118,13 +121,17 @@ namespace TextEditor
             DoRule5(richTextBox1.Text);
             richTextBox1.Text = DoAbsurdRule(richTextBox1.Text);
             richTextBox1.Text = DoRule4(richTextBox1.Text);
+            richTextBox1.Text = DoRule2(richTextBox1.Text);
+            richTextBox1.Text = DoRule3(richTextBox1.Text);
+            richTextBox1.Text = DoRule1(richTextBox1.Text);
+            richTextBox1.Text = DoRule5(richTextBox1.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text = "Любовь как дым - сегодня есть, а завтра мы не курим...";
         }
-        public void DoRule5(string input)
+        public string DoRule5(string input)
         {
             List<string> names = new List<string>();
             using (StreamReader reader = new StreamReader("Names.txt"))
@@ -138,10 +145,11 @@ namespace TextEditor
                 {
                     if (input.Contains(name.ToLower()))
                     {
-                        richTextBox1.Text = input.Replace(name.ToLower(), name);
+                        input = input.Replace(name.ToLower(), name);
                     }
                 }
             }
+            return input;
         }
 
         private void Form1_Load(object sender, EventArgs e)
